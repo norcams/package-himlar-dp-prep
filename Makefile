@@ -12,7 +12,7 @@ package: rpm
 
 .PHONY: clean
 clean:
-	sudo rm -fr installdir
+	sudo rm -fr /installdir
 	sudo rm -f $(NAME)-$(VERSION)-*.rpm
 	rm -Rf vendor/
 
@@ -25,12 +25,12 @@ deps:
 .PHONY: build
 build:
 	mkdir vendor/
-	sudo mkdir -p installdir/opt/dpapp
-	cd installdir/opt && git clone https://github.com/norcams/himlar-dp-prep.git dpapp
-	cd installdir/opt/dpapp && git submodule update --init
-	#rsync -avh vendor/himlar-dp-prep/ installdir/opt/dpapp/
-	virtualenv installdir/opt/dpapp/
-	cd installdir/opt/dpapp/ && bin/python setup.py develop
+	sudo mkdir -p /installdir/opt/dpapp
+	cd vendor && git clone https://github.com/norcams/himlar-dp-prep
+	cd vendor/himlar-dp-prep && git submodule update --init
+	rsync -avh vendor/himlar-dp-prep/ /installdir/opt/dpapp/
+	virtualenv /installdir/opt/dpapp/
+	cd /installdir/opt/dpapp/ && bin/python setup.py develop
 
 .PHONY: rpm
 rpm:
@@ -41,7 +41,7 @@ rpm:
 		--description "$(shell cat $(DESCRIPTION))" \
 		--url "$(shelpl cat $(URL))" \
 		--maintainer "$(MAINTAINER)" \
-		-C installdir/ \
+		-C /installdir/ \
 		.
 
 .PHONY: upload
