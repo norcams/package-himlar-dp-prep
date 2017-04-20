@@ -1,5 +1,5 @@
 NAME=himlar-dp-prep
-VERSION=1.0
+VERSION=1.4
 PACKAGE_VERSION=1
 DESCRIPTION=package.description
 URL=package.url
@@ -26,10 +26,12 @@ deps:
 build:
 	mkdir vendor/
 	mkdir -p /installdir/opt/dpapp
-	cd vendor && git clone https://github.com/norcams/himlar-dp-prep
+	cd vendor && git clone -b update https://github.com/norcams/himlar-dp-prep
 	cd vendor/himlar-dp-prep && git submodule update --init
 	rsync -avh vendor/himlar-dp-prep/ /installdir/opt/dpapp/
 	virtualenv /installdir/opt/dpapp/
+	# Temp fix for requests
+	cd /installdir/opt/dpapp/ && bin/pip install requests==2.12.5
 	cd /installdir/opt/dpapp/ && bin/python setup.py develop
 	echo "/opt/dpapp" > /installdir/opt/dpapp/lib/python2.7/site-packages/himlar-dp-prep.egg-link
 
