@@ -1,9 +1,9 @@
 NAME=himlar-dp-prep
-VERSION=1.4
+VERSION=1.5
 PACKAGE_VERSION=1
 DESCRIPTION=package.description
 URL=package.url
-MAINTAINER="http://norcams.org"
+MAINTAINER="https://github.com/norcams"
 RELVERSION=7
 
 .PHONY: default
@@ -20,7 +20,7 @@ clean:
 deps:
 	yum install -y gcc ruby-devel rpm-build
 	gem install -N fpm
-	yum install -y python-devel python-virtualenv git
+	yum install -iy python-devel python-virtualenv git libyaml-devel
 
 .PHONY: build
 build:
