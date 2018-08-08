@@ -26,8 +26,8 @@ deps:
 build:
 	mkdir vendor/
 	mkdir -p /installdir/opt/dpapp
-	cd vendor && git clone -b update https://github.com/norcams/himlar-dp-prep
-	cd vendor/himlar-dp-prep && git submodule update --init
+	cd vendor && git clone -b master https://github.com/norcams/himlar-dp-prep
+	cd vendor/himlar-dp-prep && git submodule master --init
 	rsync -avh vendor/himlar-dp-prep/ /installdir/opt/dpapp/
 	virtualenv /installdir/opt/dpapp/
 	# Temp fix for requests
