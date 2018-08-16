@@ -1,6 +1,6 @@
 NAME=himlar-dp-prep
 VERSION=2.0
-PACKAGE_VERSION=2
+PACKAGE_VERSION=3
 DESCRIPTION=package.description
 URL=package.url
 MAINTAINER="https://github.com/norcams"
@@ -20,14 +20,14 @@ clean:
 deps:
 	yum install -y gcc ruby-devel rpm-build
 	gem install -N fpm
-	yum install -iy python-devel python-virtualenv git libyaml-devel
+	yum install -y python-devel python-virtualenv git libyaml-devel
 
 .PHONY: build
 build:
 	mkdir vendor/
 	mkdir -p /installdir/opt/dpapp
 	cd vendor && git clone -b master https://github.com/norcams/himlar-dp-prep
-	cd vendor/himlar-dp-prep && git submodule master --init
+	cd vendor/himlar-dp-prep && git submodule update --init
 	rsync -avh vendor/himlar-dp-prep/ /installdir/opt/dpapp/
 	virtualenv /installdir/opt/dpapp/
 	# Temp fix for requests
