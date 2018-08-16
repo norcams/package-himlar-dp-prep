@@ -31,7 +31,7 @@ build:
 	rsync -avh vendor/himlar-dp-prep/ /installdir/opt/dpapp/
 	virtualenv /installdir/opt/dpapp/
 	# Temp fix for requests
-	cd /installdir/opt/dpapp/ && bin/pip install requests==2.12.5
+	cd /installdir/opt/dpapp/ && bin/pip install requests==2.18.0
 	cd /installdir/opt/dpapp/ && bin/python setup.py develop
 	cd /installdir/opt/dpapp/ && virtualenv --relocatable .
 	echo "/opt/dpapp" > /installdir/opt/dpapp/lib/python2.7/site-packages/himlar-dp-prep.egg-link
