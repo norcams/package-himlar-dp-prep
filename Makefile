@@ -1,6 +1,6 @@
 NAME=himlar-dp-prep
 VERSION=2.0
-PACKAGE_VERSION=1
+PACKAGE_VERSION=2
 DESCRIPTION=package.description
 URL=package.url
 MAINTAINER="https://github.com/norcams"
@@ -33,6 +33,7 @@ build:
 	# Temp fix for requests
 	cd /installdir/opt/dpapp/ && bin/pip install requests==2.12.5
 	cd /installdir/opt/dpapp/ && bin/python setup.py develop
+	cd /installdir/opt/dpapp/ && virtualenv --relocatable .
 	echo "/opt/dpapp" > /installdir/opt/dpapp/lib/python2.7/site-packages/himlar-dp-prep.egg-link
 
 .PHONY: rpm
