@@ -1,6 +1,6 @@
 NAME=himlar-dp-prep
 VERSION=2.0
-PACKAGE_VERSION=3
+PACKAGE_VERSION=5
 DESCRIPTION=package.description
 URL=package.url
 MAINTAINER="https://github.com/norcams"
