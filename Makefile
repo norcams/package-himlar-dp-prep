@@ -19,7 +19,7 @@ clean:
 .PHONY: deps
 deps:
 	yum install -y gcc ruby-devel rpm-build
-	gem install -N fpm
+	gem install -N fpm --version 1.11.0
 	yum install -y python-devel python-virtualenv git libyaml-devel
 
 .PHONY: build
