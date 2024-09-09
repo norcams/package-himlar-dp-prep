@@ -31,7 +31,7 @@ build:
 	mkdir -p /opt/dpapp
 	cd vendor && git clone -b upgrade https://github.com/norcams/himlar-dp-prep
 	rsync -avh vendor/himlar-dp-prep/ /opt/dpapp/
-	python3.11 -m venv /installdir/opt/dpapp/
+	python3.11 -m venv /opt/dpapp/
 	cd /opt/dpapp/ && bin/pip install --upgrade pip
 	cd /opt/dpapp/ && bin/python setup.py develop
 	cd /opt/dpapp/ && bin/pip install -r requirements.txt
