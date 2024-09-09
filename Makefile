@@ -28,7 +28,7 @@ deps:
 .PHONY: build
 build:
 	mkdir vendor/
-	mkdir -p /installdir/opt/dpapp
+	mkdir -p /opt/dpapp
 	cd vendor && git clone -b upgrade https://github.com/norcams/himlar-dp-prep
 	rsync -avh vendor/himlar-dp-prep/ /installdir/opt/dpapp/
 	python3.11 -m venv /installdir/opt/dpapp/
