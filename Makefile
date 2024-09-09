@@ -1,10 +1,10 @@
 NAME=himlar-dp-prep
-VERSION=2.0
-PACKAGE_VERSION=6
+VERSION=3.0
+PACKAGE_VERSION=1
 DESCRIPTION=package.description
 URL=package.url
 MAINTAINER="https://github.com/norcams"
-RELVERSION=7
+RELVERSION=8
 
 .PHONY: default
 default: deps build rpm
@@ -18,23 +18,25 @@ clean:
 
 .PHONY: deps
 deps:
-	yum install -y gcc ruby-devel rpm-build
-	gem install -N fpm --version 1.11.0
-	yum install -y python-devel python-virtualenv git libyaml-devel
+	dnf module reset ruby -y
+	dnf install -y @ruby:2.7
+	dnf install -y gcc rpm-build ruby-devel git python3.11-devel httpd-devel
+	gem install -N fpm
+
 
 .PHONY: build
 build:
 	mkdir vendor/
 	mkdir -p /installdir/opt/dpapp
-	cd vendor && git clone -b master https://github.com/norcams/himlar-dp-prep
-	cd vendor/himlar-dp-prep && git submodule update --init
+	cd vendor && git clone -b upgrade https://github.com/norcams/himlar-dp-prep
 	rsync -avh vendor/himlar-dp-prep/ /installdir/opt/dpapp/
-	virtualenv /installdir/opt/dpapp/
+	python3.11 -m venv /installdir/opt/dpapp/
 	# Temp fix for requests
-	cd /installdir/opt/dpapp/ && bin/pip install requests==2.18.0
+	#cd /installdir/opt/dpapp/ && bin/pip install requests==2.18.0
 	cd /installdir/opt/dpapp/ && bin/python setup.py develop
-	cd /installdir/opt/dpapp/ && virtualenv --relocatable .
-	echo "/opt/dpapp" > /installdir/opt/dpapp/lib/python2.7/site-packages/himlar-dp-prep.egg-link
+	cd /installdir/opt/dpapp/ && bin/pip install -r requirements.txt
+	#cd /installdir/opt/dpapp/ && virtualenv --relocatable .
+	#echo "/opt/dpapp" > /installdir/opt/dpapp/lib/python2.7/site-packages/himlar-dp-prep.egg-link
 
 .PHONY: rpm
 rpm:
@@ -47,4 +49,3 @@ rpm:
 		--maintainer "$(MAINTAINER)" \
 		-C /installdir/ \
 		.
-
