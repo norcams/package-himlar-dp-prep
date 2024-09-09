@@ -10,4 +10,7 @@ Makefile to build a rpm version of himlar-dp-prep pyramid application with fpm
 If you do this on vagrant-access-01:
 ``` bash
 dnf upgrade <path to new rpm>
+vagrant provision access
 ```
+
+Then test with https://access.iaas.intern/
