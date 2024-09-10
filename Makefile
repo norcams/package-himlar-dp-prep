@@ -1,6 +1,6 @@
 NAME=himlar-dp-prep
 VERSION=3.0
-PACKAGE_VERSION=1
+PACKAGE_VERSION=2
 DESCRIPTION=package.description
 URL=package.url
 MAINTAINER="https://github.com/norcams"
@@ -21,7 +21,7 @@ clean:
 deps:
 	dnf module reset ruby -y
 	dnf install -y @ruby:3.3
-	dnf install -y gcc rpm-build ruby-devel git python3.11-devel httpd-devel
+	dnf install -y gcc rpm-build ruby-devel git python3.11-devel
 	gem install -N fpm
 
 
